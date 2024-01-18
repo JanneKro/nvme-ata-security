@@ -167,10 +167,10 @@ impl From<u16> for StatusCode {
 			0x285 => CompareFailure,
 			0x286 => AccessDenied,
 			0x287 => DeallocatedOrUnwrittenLogicalBlock,
-			status @ 0x000...0x0ff => UnknownGenericStatus(status),
-			status @ 0x100...0x1ff => UnknownCommandSpecificStatus(status),
-			status @ 0x200...0x2ff => UnknownIntegrityError(status),
-			status @ 0x700...0x7ff => UnknownVendorSpecificStatus(status),
+			status @ 0x000..=0x0ff => UnknownGenericStatus(status),
+			status @ 0x100..=0x1ff => UnknownCommandSpecificStatus(status),
+			status @ 0x200..=0x2ff => UnknownIntegrityError(status),
+			status @ 0x700..=0x7ff => UnknownVendorSpecificStatus(status),
 			status @ _ => UnknownStatus(status),
 		}
 	}
@@ -262,7 +262,7 @@ pub mod security {
 			use self::Protocol::*;
 			match prot {
 				0x00 => Info,
-				0x01...0x06 => Tcg(prot),
+				0x01..=0x06 => Tcg(prot),
 				0x07 => CbCs,
 				0x20 => TapeDataEncryption,
 				0x21 => DataEncryptionConfiguration,
@@ -273,7 +273,7 @@ pub mod security {
 				0xed => SdCardTrusteFlash,
 				0xee => Ieee1667,
 				0xef => AtaSecurity,
-				0xf0...0xff => Vendor(prot),
+				0xf0..=0xff => Vendor(prot),
 				_ => Other(prot),
 			}
 		}
