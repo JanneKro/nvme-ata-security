@@ -360,11 +360,7 @@ fn read_password_err(
 	let mut buf = vec![];
 	f.read_to_end(&mut buf)?;
 	let mut out = [0u8; 32];
-	let mut sha256 = Sha256::new();
-	sha256.input(&buf);
-	sha256.input(&identity.mn());
-	sha256.input(&identity.sn());
-	out.copy_from_slice(&sha256.result());
+	out.copy_from_slice(&buf[0..32.min(buf.len())]);
 	Ok(out)
 }
 
