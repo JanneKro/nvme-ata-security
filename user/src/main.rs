@@ -34,8 +34,6 @@ use std::os::unix::fs::FileTypeExt;
 use std::os::unix::io::AsRawFd;
 use std::result::Result as StdResult;
 
-use sha2::{Digest, Sha256};
-
 use nvme::identify::IdentifyController;
 use nvme::security::Protocol::AtaSecurity as ProtocolAtaSecurity;
 use nvme::security::{AtaSecurityIdentify, AtaSecurityPassword, AtaSecuritySpecific};
